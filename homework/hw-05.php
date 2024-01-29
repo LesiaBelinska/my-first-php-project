@@ -11,23 +11,3 @@ if ($stringLength > 20) {
         echo "The string has only one sentence." . PHP_EOL;
     }
 }
-
-
-
-
-//$string = "This is first sentence. This is second sentence. This is third sentence.";
-//$stringLength = strlen($string);
-//
-//if($stringLength > 20) {
-//    $hasMultiplySentence = str_contains($string, ".");
-//    if($hasMultiplySentence) {
-//        $position = strpos($string, ".");
-//        var_dump($position);
-//        if ($position !== false && $position !== ($stringLength - 1)) {
-//            $newSentence = substr($string, $position +2, $stringLength);
-//            echo $newSentence . PHP_EOL;
-//        }
-//    } else {
-//        echo "The string has only one sentence." . PHP_EOL;
-//    }
-//}
