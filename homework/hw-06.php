@@ -1,6 +1,6 @@
 <?php
-
-function circleAreaCalculation($radius)
+declare(strict_types=1);
+function circleAreaCalculation(int|float $radius): int|float
 {
     $pi = pi();
 
@@ -16,7 +16,7 @@ echo "Площа кола з радіусом $radius дорівнює $square."
 
 //переприсвоєння
 
-function power(&$number, $pow)
+function power(int|float &$number, int|float $pow): void
 {
     $number **= $pow;
 }
@@ -28,7 +28,7 @@ echo $number . PHP_EOL;
 
 
 // повернення
-function power2($number, $pow)
+function power2(int|float $number, int|float $pow): int|float
 {
     return $number ** $pow;
 }
