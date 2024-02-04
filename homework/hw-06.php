@@ -1,6 +1,6 @@
 <?php
 
-function circleAreaCalculation($radius)
+function circleAreaCalculation($radius) : float
 {
     $pi = pi();
 
@@ -28,7 +28,7 @@ echo $number . PHP_EOL;
 
 
 // повернення
-function power2($number, $pow)
+function power2(int $number, int $pow) : int
 {
     return $number ** $pow;
 }
