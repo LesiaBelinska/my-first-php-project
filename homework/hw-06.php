@@ -16,7 +16,7 @@ echo "Площа кола з радіусом $radius дорівнює $square."
 
 //переприсвоєння
 
-function power(int|float &$number, int|float $pow)
+function power(int|float &$number, int|float $pow): void
 {
     $number **= $pow;
 }
