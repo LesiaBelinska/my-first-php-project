@@ -1,34 +1,55 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * This function can read files
+ * @param string $fileName
+ * @return Generator
+ */
 function fileReadContentGenerator(string $fileName): Generator
 {
-    $file = fopen($fileName, 'r');
-    $fileSize = filesize($fileName);
-    $content = fread($file, $fileSize);
-    fclose($file);
-    yield $content;
+    if (file_exists($fileName)) {
+        yield file_get_contents($fileName);
+    }
 }
 
+/**
+ * @param string $fileName
+ * @return string|null
+ */
+function fileReadLastLine(string $fileName): ?string
+{
+    $file = fopen($fileName, 'r');
+    $lastLine = null;
+    while (($line = fgets($file)) !== false) {
+        $lastLine = $line;
+    }
+    fclose($file);
+    return $lastLine;
+}
+
+/**
+ * @param string $fileName
+ * @return string|null
+ */
+function fileReadLastLine2(string $fileName): ?string
+{
+    if (file_exists($fileName)) {
+        $lines = file($fileName);
+        return end($lines);
+    }
+    return null;
+}
+
+
+/**
+ * @param string $fileName
+ * @param string $message
+ * @return void
+ */
 function fileAddContent(string $fileName, string $message): void
 {
-    $file = fopen($fileName, 'a');
-    fwrite($file, $message . "\n");
-    fclose($file);
+    file_put_contents($fileName, $message . "\n", FILE_APPEND);
 }
 
-function Logger(string $message, string $type, string $file = LOG_FILE): bool
-{
-
-    $filePath = LOG_DIR . $file;
-
-    $date = date('d-M-Y H:i:s');
-    $message = "[$type][$date][$message]" . PHP_EOL;
-
-    $file = fopen($filePath, 'a+'); // спробувати file_put_contents
-    $result = fwrite($file, $message);
-    fclose($file);
-
-    return (bool)$result;
-}
 
