@@ -1,13 +1,17 @@
 <?php
 
-require __DIR__ . '/index.php';
-require_once APP_DIR . 'classes/Worker';
+require __DIR__ . '/../index.php';
+require APP_DIR . 'classes/Worker.php';
 //$worker = new Worker(); // without __construct
 //$worker->setName("Jon");
 //$worker->setPosition("developer");
 
-$worker = new Worker("Jon", "developer");
-$worker1 = new Worker("Kate", "manager");
+try {
+    $worker = new Worker("J", "developer");
+    $worker2 = new Worker("Kate", "manager");
+} catch (Exception $exception){
+    echo $exception->getMessage();
+}
 
 
 //Виклик методів
@@ -17,4 +21,4 @@ $worker1 = new Worker("Kate", "manager");
      echo "position: " . $worker->getPosition() . PHP_EOL;
  }
  showWorkerInformation($worker);
- showWorkerInformation($worker1);
+ showWorkerInformation($worker2);
