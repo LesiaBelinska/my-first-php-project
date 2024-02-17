@@ -1,5 +1,7 @@
 <?php
 
+//require APP_DIR . 'enums/WorkPositions.php';
+
 class Worker
 {
     private string $name;
@@ -17,8 +19,9 @@ class Worker
     public function setName(string $name): void
     {
         if (strlen($name) < 2) {
-            throw new Exception('Invalid name, must be more than 2 symbols');
+            throw new Exception('Invalid name, must be more than 2 symbols' . PHP_EOL);
         }
+
         $this->name = $name;
     }
 
@@ -29,11 +32,13 @@ class Worker
     {
         return $this->name;
     }
+
     /**
      * @param string $position
      */
     public function setPosition(string $position): void
     {
+        $this->checkPosition($position);
         $this->position = $position;
     }
 
@@ -44,4 +49,15 @@ class Worker
     {
         return $this->position;
     }
+
+    private function checkPosition(string $position): void
+    {
+        $allowedPosition = WorkPositions::values();
+
+        if (!in_array($position, $allowedPosition)) {
+            throw new Exception('Position is invalid! Allowed position: ' . implode(', ', $allowedPosition) . PHP_EOL);
+        }
+    }
 }
+
+
