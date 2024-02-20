@@ -1,7 +1,5 @@
 <?php
 
-//require APP_DIR . 'enums/WorkPositions.php';
-
 class Worker
 {
     private string $name;
