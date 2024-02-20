@@ -79,7 +79,7 @@ class BankAccount
     private function validateAmount(int $amount, string $purpose): void
     {
         if ($amount <= 0) {
-            throw new Exception("Invalid amount for $purpose.");
+            throw new Exception("Invalid amount for $purpose." . PHP_EOL);
         }
     }
 
