@@ -16,6 +16,10 @@ class BankAccount
      */
     public function setAccountNumber(int $accountNumber): void
     {
+        $accountNumberLength = strlen($accountNumber);
+        if ($accountNumberLength < 5 || $accountNumberLength > 13) {
+            throw new Exception("Invalid account number length. Account number must be between 5 and 13 digits long.");
+        }
         $this->accountNumber = $accountNumber;
     }
 
@@ -49,7 +53,7 @@ class BankAccount
     public function deposit(int $amount): bool // змінено з void на bool
     {
 //        $this->validateAmount($amount, 'deposit');
-        $this->validateAmount($amount);
+        $this->validateAmount($amount, 'deposit');
         $this->balance += $amount;
 //        $this->showMessage("Account has been credited with $amount USD. New balance: {$this->balance}");
         return true; // додала
@@ -58,7 +62,7 @@ class BankAccount
     public function withdraw(int $amount): bool // змінено з void на bool
     {
 //        $this->validateAmount($amount, 'withdraw');
-        $this->validateAmount($amount);
+        $this->validateAmount($amount, 'withdraw');
         if ($amount > $this->balance) {
             throw new Exception('Not enough funds in the account.' . PHP_EOL);
         }
