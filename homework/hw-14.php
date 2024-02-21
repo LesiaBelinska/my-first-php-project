@@ -9,27 +9,43 @@ try {
     echo $exception->getMessage();
 }
 
-//try {
-//    $bankAccount->deposit(500);
-//    $bankAccount->withdraw(200);
-//    $bankAccount->withdraw(10000);
-//    $bankAccount->withdraw(0);
-//    $bankAccount->deposit(0);
-//    $bankAccount->deposit(500000);
-//} catch (Exception $exception) {
-//    echo $exception->getMessage();
-//}
-
 
 if (isset($bankAccount)) {
     $bankAccount->showAccountInfo();
 }
 
-//$bankAccount->deposit(500);
-//$bankAccount->withdraw(200);
-//
-//$bankAccount->withdraw(10000);
-//
-//$bankAccount->withdraw(0);
-//$bankAccount->deposit(0);
-//$bankAccount->deposit(500000);
+try {
+    $bankAccount->deposit(500);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+try {
+    $bankAccount->withdraw(200);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+try {
+    $bankAccount->withdraw(10000);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+try {
+    $bankAccount->withdraw(0);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+try {
+    $bankAccount->deposit(0);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+try {
+    $bankAccount->deposit(500000);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
