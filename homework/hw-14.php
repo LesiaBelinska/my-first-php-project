@@ -2,10 +2,10 @@
 
 require __DIR__ . '/../index.php';
 require APP_DIR . 'classes/BankAccount.php';
+require APP_DIR . 'classes/MessageHandler.php';
 
 $messageHandler = new MessageHandler();
 
-var_dump($messageHandler);
 
 try {
     $bankAccount = new BankAccount(12345678, 1000);
@@ -19,43 +19,66 @@ if (isset($bankAccount)) {
 }
 
 try {
-    $bankAccount->deposit(500);
-} catch (Exception $exception) {
-    echo $exception->getMessage();
-} finally {
-
-}
-
-try {
-    $bankAccount->withdraw(200);
+   if (isset($bankAccount)) {  // ?????? чи потрібно тут використовувати перевірку?????
+       $amount = 500;
+       $bankAccount->deposit($amount);
+       $newBalance = $bankAccount->getBalance();
+       MessageHandler::showMessage("Account has been credited with $amount USD. New balance: $newBalance USD");
+   }
 } catch (Exception $exception) {
     echo $exception->getMessage();
 }
 
 try {
-    $bankAccount->withdraw(10000);
+    $amount = 200;
+    $bankAccount->withdraw($amount);
+    $newBalance = $bankAccount->getBalance();
+    MessageHandler::showMessage("Withdrew $amount USD. New balance: $newBalance USD.");
 } catch (Exception $exception) {
     echo $exception->getMessage();
 }
 
 try {
-    $bankAccount->withdraw(0);
+    $amount = 10000;
+    $bankAccount->withdraw($amount);
+    $newBalance = $bankAccount->getBalance();
+    MessageHandler::showMessage("Withdrew $amount USD. New balance: $newBalance USD.");
+} catch (Exception $exception) {
+    echo $exception->getMessage();
+}
+
+
+try {
+    $amount = 0;
+    $bankAccount->withdraw($amount);
+    $newBalance = $bankAccount->getBalance();
+    MessageHandler::showMessage("Withdrew $amount USD. New balance: $newBalance USD.");
 } catch (Exception $exception) {
     echo $exception->getMessage();
 }
 
 try {
-    $bankAccount->deposit(0);
+    $amount = 0;
+    $bankAccount->deposit($amount);
+    $newBalance = $bankAccount->getBalance();
+    MessageHandler::showMessage("Account has been credited with $amount USD. New balance: $newBalance USD");
 } catch (Exception $exception) {
     echo $exception->getMessage();
 }
 
 try {
-    $bankAccount->deposit(500000);
+    $amount = 500000;
+    $bankAccount->deposit($amount);
+    $newBalance = $bankAccount->getBalance();
+    MessageHandler::showMessage("Account has been credited with $amount USD. New balance: $newBalance USD");
 } catch (Exception $exception) {
     echo $exception->getMessage();
 }
 
+
+if (isset($bankAccount)) {
+    $bankAccount->showAccountInfo();
+}
 
 
 
