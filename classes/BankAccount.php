@@ -45,12 +45,6 @@ class BankAccount
 
     public function deposit(int $amount): void
     {
-//        if ($amount > 0) {
-//            $this->balance += $amount;
-//            echo "Account has been credited with $amount USD. New balance: {$this->balance}" . PHP_EOL;
-//        } else {
-//            echo "Invalid amount for deposit" . PHP_EOL;
-//        }
         $this->validateAmount($amount, 'deposit');
         $this->balance += $amount;
         $this->showMessage("Account has been credited with $amount USD. New balance: {$this->balance}");
@@ -58,16 +52,6 @@ class BankAccount
 
     public function withdraw(int $amount): void
     {
-//        if ($amount > 0) {
-//            if ($amount <= $this->balance) {
-//                $this->balance -= $amount;
-//                echo "Withdrew $amount USD. New balance: {$this->balance} USD." . PHP_EOL;
-//            } else {
-//                echo "Not enough funds in the account." . PHP_EOL;
-//            }
-//        } else {
-//            echo "Invalid amount for withdrawal." . PHP_EOL;
-//        }
         $this->validateAmount($amount, 'withdraw');
         if ($amount > $this->balance) {
             throw new Exception('Not enough funds in the account.' . PHP_EOL);
