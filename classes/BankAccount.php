@@ -16,6 +16,10 @@ class BankAccount
      */
     public function setAccountNumber(int $accountNumber): void
     {
+        $accountNumberLength = strlen($accountNumber);
+        if ($accountNumberLength < 5 || $accountNumberLength > 13) {
+            throw new Exception("Invalid account number length. Account number must be between 5 and 13 digits long.");
+        }
         $this->accountNumber = $accountNumber;
     }
 
@@ -32,6 +36,9 @@ class BankAccount
      */
     public function setBalance(int $balance): void
     {
+        if ($balance < 0) { //додала
+            throw new Exception("Invalid balance amount." . PHP_EOL);
+        }
         $this->balance = $balance;
     }
 
@@ -43,21 +50,21 @@ class BankAccount
         return $this->balance;
     }
 
-    public function deposit(int $amount): void
+    public function deposit(int $amount): bool
     {
         $this->validateAmount($amount, 'deposit');
         $this->balance += $amount;
-        $this->showMessage("Account has been credited with $amount USD. New balance: {$this->balance}");
+        return true;
     }
 
-    public function withdraw(int $amount): void
+    public function withdraw(int $amount): bool
     {
         $this->validateAmount($amount, 'withdraw');
         if ($amount > $this->balance) {
             throw new Exception('Not enough funds in the account.' . PHP_EOL);
         }
         $this->balance -= $amount;
-        $this->showMessage("Withdrew $amount USD. New balance: {$this->balance} USD.");
+        return true;
     }
 
     private function validateAmount(int $amount, string $purpose): void
@@ -65,11 +72,6 @@ class BankAccount
         if ($amount <= 0) {
             throw new Exception("Invalid amount for $purpose." . PHP_EOL);
         }
-    }
-
-    private function showMessage(string $message): void
-    {
-        echo $message . PHP_EOL;
     }
 
     public function showAccountInfo(): void
