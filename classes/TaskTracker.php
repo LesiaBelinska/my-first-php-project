@@ -15,6 +15,7 @@ class TaskTracker
 
     public function __destruct()
     {
+//        file_put_contents($this->fileName, ""); // додала!!!!!
         $this->writeTaskToFile();
     }
 
@@ -23,10 +24,10 @@ class TaskTracker
         $taskId = uniqid();
         $this->tasks[$taskId] = [
             'taskName' => $taskName,
-            'priority' => $priority,
-            'status' => TaskStatus::NOT_COMPLETED,
+            'priority' => $priority->value,
+            'status' => TaskStatus::NOT_COMPLETED->value,
         ];
-        $this->writeTaskToFile();
+//        $this->writeTaskToFile();  // не потрібно якщо є destruct
     }
 
     public function deleteTask($taskId): bool
@@ -52,7 +53,7 @@ class TaskTracker
     public function completeTask($taskId): bool
     {
         if (isset($this->tasks[$taskId])) {
-            $this->tasks[$taskId]['status'] = TaskStatus::COMPLETED;
+            $this->tasks[$taskId]['status'] = TaskStatus::COMPLETED->value;
             $this->writeTaskToFile();
             return true;
         }
@@ -71,7 +72,8 @@ class TaskTracker
                     $tasks[$data[0]] = [
                         'taskName' => $data[1],
                         'priority' => $data[2],
-                        'status' => TaskStatus::NOT_COMPLETED,
+//                        'status' => TaskStatus::NOT_COMPLETED->value,
+                        'status' => $data[3],
                     ];
                 }
             }
@@ -85,7 +87,8 @@ class TaskTracker
         foreach ($this->tasks as $taskId => $task) {
             $fileContent .= "$taskId|{$task['taskName']}|{$task['priority']}|{$task['status']}\n";
         }
-        file_put_contents($this->fileName, $fileContent, FILE_APPEND);
+//        file_put_contents($this->fileName, $fileContent, FILE_APPEND);
+        file_put_contents($this->fileName, $fileContent);
     }
 
     private function sortByPriority($a, $b): int
@@ -93,9 +96,20 @@ class TaskTracker
         $priorityOrder = [
             'low' => 1,
             'middle' => 2,
-            'high' => 1,
+            'high' => 3,
         ];
-        return $priorityOrder[$a['priority']] - $priorityOrder[$b['priority']];
+        return $priorityOrder[$b['priority']] - $priorityOrder[$a['priority']];
+    }
+
+    public function displayTasks(array $tasks): void
+    {
+        foreach ($tasks as $taskId => $task) {
+            echo "Task ID: $taskId\n";
+            echo "Task Name: {$task['taskName']}\n";
+            echo "Priority: {$task['priority']}\n";
+            echo "Status: {$task['status']}\n";
+            echo "-----------------------------\n";
+        }
     }
 }
 
