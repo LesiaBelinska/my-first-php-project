@@ -101,8 +101,9 @@ class TaskTracker
         return $priorityOrder[$b['priority']] - $priorityOrder[$a['priority']];
     }
 
-    public function displayTasks(array $tasks): void
+    public function displayTasks(): void
     {
+        $tasks = $this->getTasks();
         foreach ($tasks as $taskId => $task) {
             echo "Task ID: $taskId\n";
             echo "Task Name: {$task['taskName']}\n";
