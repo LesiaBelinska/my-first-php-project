@@ -87,8 +87,8 @@ class TaskTracker
         foreach ($this->tasks as $taskId => $task) {
             $fileContent .= "$taskId|{$task['taskName']}|{$task['priority']}|{$task['status']}\n";
         }
-//        file_put_contents($this->fileName, $fileContent, FILE_APPEND);
-        file_put_contents($this->fileName, $fileContent);
+        file_put_contents($this->fileName, $fileContent, FILE_APPEND);
+//        file_put_contents($this->fileName, $fileContent);
     }
 
     private function sortByPriority($a, $b): int
