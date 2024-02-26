@@ -24,7 +24,7 @@ $taskList->completeTask('');
 $taskList->deleteTask('');
 
 $myTasks = $taskList->getTasks();
-$taskList->displayTasks($myTasks);
+$taskList->displayTasks();
 
 
 
