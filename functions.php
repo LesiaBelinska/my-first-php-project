@@ -49,4 +49,29 @@ function fileAddContent(string $fileName, string $message): void
     }
 }
 
+/**
+ * Outputs the text printed by the specified printer.
+ *
+ * This function accepts an object of the TextPrinter class or its subclass
+ * and outputs the text printed by this printer.
+ * @param TextPrinter $printer
+ * @return void
+ */
+function showText(TextPrinter $printer): void
+{
+    echo $printer->print() . PHP_EOL;
+}
+
+/**
+ * Shows details of a Figure object including area and perimeter.
+ *
+ * @param Figure $figure
+ * @return void
+ */
+function showFigureDetails(Figure $figure): void
+{
+    echo "Details: ";
+    echo "Area = {$figure->getArea()}, ";
+    echo "Perimeter = {$figure->getPerimeter()}" . PHP_EOL;
+}
 
