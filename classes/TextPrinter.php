@@ -17,8 +17,4 @@ class TextPrinter
         return ucfirst($this->text);
     }
 
-    public function showText(): void
-    {
-        echo $this->print() . PHP_EOL;
-    }
 }
