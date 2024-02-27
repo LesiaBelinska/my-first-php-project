@@ -1,6 +1,7 @@
 <?php
 
-class TextPrinter {
+class TextPrinter
+{
     protected string $text;
 
     public function __construct(string $text = "some text")
