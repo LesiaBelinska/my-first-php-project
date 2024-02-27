@@ -7,6 +7,9 @@ class TaskTracker
 
     public function __construct(string $fileName)
     {
+        if (!file_exists($fileName)) {
+            throw new Exception("File $fileName does not exist.");
+        }
         $this->fileName = $fileName;
         $this->loadTasksFromFile();
     }
@@ -18,6 +21,9 @@ class TaskTracker
 
     public function addTask($taskName, $priority): void
     {
+        if (!($priority instanceof Priority)) {
+            throw new InvalidArgumentException("Priority must be an instance of Priority enum.");
+        }
         $taskId = uniqid();
         $this->tasks[$taskId] = [
             'taskName' => $taskName,
@@ -28,12 +34,11 @@ class TaskTracker
 
     public function deleteTask($taskId)
     {
-        if (isset($this->tasks[$taskId])) {
-            unset($this->tasks[$taskId]);
-            $this->writeTaskToFile();
-            return true;
+        if (!isset($this->tasks[$taskId])) {
+            throw new InvalidArgumentException("Task with ID $taskId does not exist.");
         }
-        return false;
+        unset($this->tasks[$taskId]);
+        return true;
     }
 
     /**
@@ -44,35 +49,34 @@ class TaskTracker
         $tasks = $this->tasks;
         uasort($tasks, array($this, 'sortByPriority'));
 
-        print_r($tasks);
         return $tasks;
     }
 
     public function completeTask($taskId)
     {
-        if (isset($this->tasks[$taskId])) {
-            $this->tasks[$taskId]['status'] = TaskStatus::COMPLETED->value;
-            $this->writeTaskToFile();
-            return true;
+        if (!isset($this->tasks[$taskId])) {
+            throw new InvalidArgumentException("Task with ID $taskId does not exist.");
         }
-        return false;
+        $this->tasks[$taskId]['status'] = TaskStatus::COMPLETED->value;
+        return true;
     }
 
     private function loadTasksFromFile(): void
     {
         $fileContent = file_get_contents($this->fileName);
+        if ($fileContent === false) {
+            throw new Exception("Failed to load tasks from file.");
+        }
         $tasks = [];
-        if ($fileContent !== false) {
-            $lines = explode("\n", $fileContent);
-            foreach ($lines as $line) {
-                $data = explode("|", $line);
-                if (count($data) === 4) { // Поправлено на 4, бо 4 значення в записі
-                    $tasks[$data[0]] = [
-                        'taskName' => $data[1],
-                        'priority' => $data[2],
-                        'status' => $data[3],
-                    ];
-                }
+        $lines = explode("\n", $fileContent);
+        foreach ($lines as $line) {
+            $data = explode("|", $line);
+            if (count($data) === 4) {
+                $tasks[$data[0]] = [
+                    'taskName' => $data[1],
+                    'priority' => $data[2],
+                    'status' => $data[3],
+                ];
             }
         }
         $this->tasks = $tasks;
@@ -84,7 +88,10 @@ class TaskTracker
         foreach ($this->tasks as $taskId => $task) {
             $fileContent .= "$taskId|{$task['taskName']}|{$task['priority']}|{$task['status']}\n";
         }
-        file_put_contents($this->fileName, $fileContent);
+        $result = file_put_contents($this->fileName, $fileContent);
+        if ($result === false) {
+            throw new Exception("Failed to write tasks to file."); // Зміна: Додано перевірку на помилку запису в файл
+        }
     }
 
     private function sortByPriority($a, $b): int
@@ -97,16 +104,16 @@ class TaskTracker
         return $priorityOrder[$b['priority']] - $priorityOrder[$a['priority']];
     }
 
-//    public function displayTasks(): void
-//    {
-//        $tasks = $this->getTasks();
-//        foreach ($tasks as $taskId => $task) {
-//            echo "Task ID: $taskId\n";
-//            echo "Task Name: {$task['taskName']}\n";
-//            echo "Priority: {$task['priority']}\n";
-//            echo "Status: {$task['status']}\n";
-//            echo "-----------------------------\n";
-//        }
-//    }
+    public function displayTasks(): void
+    {
+        $tasks = $this->getTasks();
+        foreach ($tasks as $taskId => $task) {
+            echo "Task ID: $taskId\n";
+            echo "Task Name: {$task['taskName']}\n";
+            echo "Priority: {$task['priority']}\n";
+            echo "Status: {$task['status']}\n";
+            echo "-----------------------------\n";
+        }
+    }
 }
 
