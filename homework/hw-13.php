@@ -5,25 +5,23 @@ require APP_DIR . 'classes/TaskTracker.php';
 require APP_DIR . 'enums/TaskStatus.php';
 require APP_DIR . 'enums/Priority.php';
 
-$fileName = APP_DIR . 'files/tasks.txt';
+$tasksFile = APP_DIR . 'files/tasks.txt';
 
 try {
-    $taskList = new TaskTracker($fileName);
-} catch (error) {
-    echo "ERROR!!!!!" . PHP_EOL;
+    $taskList = new TaskTracker($tasksFile);
+} catch (Exception $exception) {
+    echo $exception->getMessage();
     exit;
 }
 
-//$taskList->addTask("do homework", Priority::HIGH);
-//$taskList->addTask("buy coffee", Priority::LOW);
-//$taskList->addTask("buy tickets to London", Priority::MEDIUM);
-//$taskList->addTask("go to the gym", Priority::MEDIUM);
-//$taskList->addTask("call to mom", Priority::LOW);
-//$taskList->addTask("do donate", Priority::HIGH);
-$taskList->completeTask('');
-$taskList->deleteTask('');
 
-$myTasks = $taskList->getTasks();
+$taskList->addTask("do homework", Priority::HIGH);
+$taskList->addTask("buy coffee", Priority::LOW);
+$taskList->addTask("go to the gym", Priority::MEDIUM);
+$taskList->addTask("call to mom", Priority::LOW);
+$taskList->addTask("do donate", Priority::HIGH);
+$taskList->completeTask('65de08d1ca13c');
+$taskList->deleteTask('65de08d1ca145');
 
-
+$taskList->displayTasks();
 
