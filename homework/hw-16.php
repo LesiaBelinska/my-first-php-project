@@ -6,19 +6,25 @@ require APP_DIR . 'classes/Rectangle.php';
 require APP_DIR . 'classes/Circle.php';
 require APP_DIR . 'functions.php';
 
+$rectangle = null;
+$circle = null;
+
 try {
     $rectangle = new Rectangle(9.5, 5);
 } catch (Exception $exception) {
     echo $exception->getMessage();
-    exit;
 }
 
 try {
     $circle = new Circle(8);
 } catch (Exception $exception) {
     echo $exception->getMessage();
-    exit;
 }
 
-showFigureDetails($rectangle);
-showFigureDetails($circle);
+if($rectangle){
+    showFigureDetails($rectangle);
+}
+
+if($circle){
+    showFigureDetails($circle);
+}
