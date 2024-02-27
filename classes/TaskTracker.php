@@ -8,14 +8,11 @@ class TaskTracker
     public function __construct(string $fileName)
     {
         $this->fileName = $fileName;
-        if(file_exists($this->fileName)){
-            $this->tasks = $this->readTaskFromFile();
-        }
+        $this->loadTasksFromFile();
     }
 
     public function __destruct()
     {
-//        file_put_contents($this->fileName, ""); // додала!!!!!
         $this->writeTaskToFile();
     }
 
@@ -27,10 +24,9 @@ class TaskTracker
             'priority' => $priority->value,
             'status' => TaskStatus::NOT_COMPLETED->value,
         ];
-//        $this->writeTaskToFile();  // не потрібно якщо є destruct
     }
 
-    public function deleteTask($taskId): bool
+    public function deleteTask($taskId)
     {
         if (isset($this->tasks[$taskId])) {
             unset($this->tasks[$taskId]);
@@ -46,11 +42,13 @@ class TaskTracker
     public function getTasks(): array
     {
         $tasks = $this->tasks;
-        usort($tasks, array($this, 'sortByPriority'));
+        uasort($tasks, array($this, 'sortByPriority'));
+
+        print_r($tasks);
         return $tasks;
     }
 
-    public function completeTask($taskId): bool
+    public function completeTask($taskId)
     {
         if (isset($this->tasks[$taskId])) {
             $this->tasks[$taskId]['status'] = TaskStatus::COMPLETED->value;
@@ -60,7 +58,7 @@ class TaskTracker
         return false;
     }
 
-    private function readTaskFromFile(): array
+    private function loadTasksFromFile(): void
     {
         $fileContent = file_get_contents($this->fileName);
         $tasks = [];
@@ -68,17 +66,16 @@ class TaskTracker
             $lines = explode("\n", $fileContent);
             foreach ($lines as $line) {
                 $data = explode("|", $line);
-                if (count($data) === 3) {
+                if (count($data) === 4) { // Поправлено на 4, бо 4 значення в записі
                     $tasks[$data[0]] = [
                         'taskName' => $data[1],
                         'priority' => $data[2],
-//                        'status' => TaskStatus::NOT_COMPLETED->value,
                         'status' => $data[3],
                     ];
                 }
             }
         }
-        return $tasks;
+        $this->tasks = $tasks;
     }
 
     private function writeTaskToFile(): void
@@ -87,30 +84,29 @@ class TaskTracker
         foreach ($this->tasks as $taskId => $task) {
             $fileContent .= "$taskId|{$task['taskName']}|{$task['priority']}|{$task['status']}\n";
         }
-        file_put_contents($this->fileName, $fileContent, FILE_APPEND);
-//        file_put_contents($this->fileName, $fileContent);
+        file_put_contents($this->fileName, $fileContent);
     }
 
     private function sortByPriority($a, $b): int
     {
         $priorityOrder = [
             'low' => 1,
-            'middle' => 2,
+            'medium' => 2,
             'high' => 3,
         ];
         return $priorityOrder[$b['priority']] - $priorityOrder[$a['priority']];
     }
 
-    public function displayTasks(): void
-    {
-        $tasks = $this->getTasks();
-        foreach ($tasks as $taskId => $task) {
-            echo "Task ID: $taskId\n";
-            echo "Task Name: {$task['taskName']}\n";
-            echo "Priority: {$task['priority']}\n";
-            echo "Status: {$task['status']}\n";
-            echo "-----------------------------\n";
-        }
-    }
+//    public function displayTasks(): void
+//    {
+//        $tasks = $this->getTasks();
+//        foreach ($tasks as $taskId => $task) {
+//            echo "Task ID: $taskId\n";
+//            echo "Task Name: {$task['taskName']}\n";
+//            echo "Priority: {$task['priority']}\n";
+//            echo "Status: {$task['status']}\n";
+//            echo "-----------------------------\n";
+//        }
+//    }
 }
 
