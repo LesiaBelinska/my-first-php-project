@@ -1,6 +1,0 @@
-65dd9c4fde0f3|do homework|high|not completed
-65dd9c4fde13b|buy coffee|low|not completed
-65dd9c4fde13d|buy tickets to London|middle|not completed
-65dd9c60cfdf4|go to the gym|middle|not completed
-65dd9c60cfdf9|call to mom|low|not completed
-65dd9c60cfdfb|do donate|high|not completed
