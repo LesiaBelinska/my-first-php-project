@@ -14,17 +14,16 @@ try {
     exit;
 }
 
-$taskList->addTask("do homework", Priority::HIGH);
-$taskList->addTask("buy coffee", Priority::LOW);
-$taskList->addTask("buy tickets to London", Priority::MIDDLE);
-$taskList->addTask("go to the gym", Priority::MIDDLE);
-$taskList->addTask("call to mom", Priority::LOW);
-$taskList->addTask("do donate", Priority::HIGH);
+//$taskList->addTask("do homework", Priority::HIGH);
+//$taskList->addTask("buy coffee", Priority::LOW);
+//$taskList->addTask("buy tickets to London", Priority::MEDIUM);
+//$taskList->addTask("go to the gym", Priority::MEDIUM);
+//$taskList->addTask("call to mom", Priority::LOW);
+//$taskList->addTask("do donate", Priority::HIGH);
 $taskList->completeTask('');
 $taskList->deleteTask('');
 
 $myTasks = $taskList->getTasks();
-$taskList->displayTasks();
 
 
 
