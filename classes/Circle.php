@@ -32,10 +32,4 @@ class Circle extends Figure
     {
         return round(2 * pi() * $this->radius, 1);
     }
-
-//    public function getDetails(): string
-//    {
-//        return "Circle: Radius = $this->radius, Area = {$this->getArea()}, Perimeter = {$this->getPerimetr()}" . PHP_EOL;
-//    }
-
 }
