@@ -15,7 +15,7 @@ class Logger
         if ($method === 'action') {
             return self::action($message, $file);
         }
-       
+
         return false;
     }
 
@@ -35,6 +35,6 @@ class Logger
         $date = date('d-m-Y H:i:s');
         $message = "[" . $level->value . "][$date][$message]" . PHP_EOL;
 
-        return file_put_contents($filePath, $message);
+        return file_put_contents($filePath, $message, FILE_APPEND);
     }
 }
