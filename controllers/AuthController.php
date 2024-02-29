@@ -6,8 +6,8 @@ class AuthController
 
     public function login()
     {
-        $email = "test@test.com";
-        $password = '12345';
+        $email = "test.test.com";
+        $password = '123456789';
         $data = [
             'email' => $email,
             'password' => $password,
@@ -22,6 +22,6 @@ class AuthController
             if($this->errors){
                 throw new Exception(implode('-', $this->errors));
             }
-            echo "success";
+            echo "success" . PHP_EOL; // Забрати !!!!! додати вивід повідомлення про success
     }
 }
