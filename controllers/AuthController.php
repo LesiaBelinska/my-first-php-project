@@ -4,24 +4,25 @@ class AuthController
 {
     use Validator;
 
-    public function login()
+    public function login(array $data): void
     {
-        $email = "test.test.com";
-        $password = '123456789';
+        $email = $data['email'];
+        $password = $data['password'];
+
         $data = [
             'email' => $email,
             'password' => $password,
         ];
 
         $rules = [
-            'email' => 'required|email|max:250',
+            'email' => 'required|email|max:150',
             'password' => 'required|max:250|min:8',
         ];
-            $this->validate($data, $rules);
 
-            if($this->errors){
-                throw new Exception(implode('-', $this->errors));
-            }
-            echo "success" . PHP_EOL; // Забрати !!!!! додати вивід повідомлення про success
+        $this->validate($data, $rules);
+
+        if ($this->errors) {
+            throw new Exception(implode('-', $this->errors));
+        }
     }
 }
