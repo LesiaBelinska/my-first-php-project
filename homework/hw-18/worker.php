@@ -5,7 +5,8 @@ class worker // Порушення PSR-1: Basic Coding Standard - Class names MU
     private string $name;
     private string $position;
 
-    public function __construct(string $name ,string $position)  // Порушення PSR-12: Extended Coding Style - In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma.
+    public function __construct(string $name ,string $position)  // Порушення PSR-12: Extended Coding Style - In the argument list,
+                                                                // there MUST NOT be a space before each comma, and there MUST be one space after each comma.
     {
         $this->set_name($name);
         $this->set_position($position);
