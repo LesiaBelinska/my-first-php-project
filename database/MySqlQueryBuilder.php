@@ -73,7 +73,6 @@ class MySqlQueryBuilder implements SQLQueryBuilder
         return $this->query->values;
     }
 
-    // додаю
     public function insert(string $table, array $data): SQLQueryBuilder
     {
         $fields = implode(', ', array_keys($data));
@@ -110,7 +109,4 @@ class MySqlQueryBuilder implements SQLQueryBuilder
 
         return $this;
     }
-
-
-
 }
