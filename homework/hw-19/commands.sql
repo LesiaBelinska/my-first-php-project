@@ -66,10 +66,10 @@ CREATE TABLE IF NOT EXISTS  `tags` (
     );
 
 CREATE TABLE IF NOT EXISTS  `post_tag` (
-                                           `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                                           `post_id` INT UNSIGNED,
-                                           `tag_id` INT UNSIGNED,
-                                           FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`),
+    `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    `post_id` INT UNSIGNED,
+    `tag_id` INT UNSIGNED,
+    FOREIGN KEY (`post_id`) REFERENCES `posts`(`id`),
     FOREIGN KEY (`tag_id`) REFERENCES `tags`(`id`)
     );
 
@@ -87,3 +87,21 @@ SELECT * FROM `tags` WHERE `id` IN (1, 2);
 
 SELECT COUNT(`id`) as counter FROM `users` WHERE `age` > 20;
 SELECT AVG(`age`) as avg FROM `users`;
+
+SELECT `posts`.`title`, `posts`.`content`, `users`.`name` FROM `posts`
+    INNER JOIN `users` ON `posts`.`user_id` = `users`.`id`;
+
+SELECT `posts`.`title`, `posts`.`content`, `users`.`name` FROM `posts`
+    LEFT JOIN `users` ON `posts`.`user_id` = `users`.`id`;
+
+SELECT `posts`.`title`, `posts`.`content`, `users`.`name` FROM `posts`
+    RIGHT JOIN `users` ON `posts`.`user_id` = `users`.`id`;
+
+SELECT `posts`.`title`, `posts`.`content`, `users`.`name` FROM `posts`
+    CROSS JOIN `users`;
+
+SELECT COUNT(`posts`.`id`) as counter, `users`.`name` FROM `posts`
+    RIGHT JOIN `users` ON `posts`.`user_id` = `users`.`id` GROUP BY `users`.`name`;
+
+SELECT COUNT(`posts`.`id`) as counter, `users`.`name` FROM `posts`
+    RIGHT JOIN `users` ON `posts`.`user_id` = `users`.`id` GROUP BY `users`.`name` HAVING `counter` > 1;
