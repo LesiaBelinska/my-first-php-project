@@ -24,7 +24,7 @@ class Repository
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
-    //
+    
     public function insert(array $data): void
     {
         $sql = $this->builder->insert(static::$table, $data)->getSQL();
