@@ -67,7 +67,7 @@ class MySqlQueryBuilder implements SQLQueryBuilder
 
     public function getValues(): array
     {
-        if(!isset($this->query->values)) {
+        if (!isset($this->query->values)) {
             return [];
         }
         return $this->query->values;
