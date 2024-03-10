@@ -13,7 +13,7 @@ $builder = new MySqlQueryBuilder();
 $userRepository = new UserRepository(Connector::getInstance(), $builder);
 
 // INSERT
-$userRepository->insert(['name' => 'Alice', 'email' => 'alice@ukr.net', 'password' => 'password', 'gender' => 'female', 'age' => 18 ]);
+$userRepository->insert(['name' => 'Alice', 'email' => 'alice@ukr.net', 'password' => 'password', 'gender' => 'female', 'age' => 18]);
 
 $userRepository->insertMany([
     ['name' => 'Alen', 'email' => 'alen@ukr.net', 'password' => 'password', 'gender' => 'male', 'age' => 55],
