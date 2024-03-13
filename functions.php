@@ -75,3 +75,8 @@ function showFigureDetails(Figure $figure): void
     echo "Perimeter = {$figure->getPerimeter()}" . PHP_EOL;
 }
 
+function view(string $path, array $variables = []): bool
+{
+    $view = new View();
+    return $view->render($path, $variables);
+}
