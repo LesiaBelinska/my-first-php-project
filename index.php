@@ -9,6 +9,7 @@ require_once APP_DIR . 'functions.php';
 require_once APP_DIR . 'system/Request.php';
 require_once APP_DIR . 'system/Router.php';
 require_once APP_DIR . 'traits/Validator.php';
+require_once APP_DIR . 'traits/NumberValidator.php';
 require_once APP_DIR . 'controllers/AuthController.php';
 require_once APP_DIR . 'controllers/GreetingController.php';
 require_once APP_DIR . 'controllers/CalculateController.php';
@@ -35,6 +36,7 @@ $router->addRoute('/greeting', [
 
 $router->addRoute('/calculate', [
     'get'=> 'CalculateController@calculate',
+    'post'=>'CalculateController@calculateResult',
 ]);
 
 
