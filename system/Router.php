@@ -9,7 +9,7 @@ class Router
         $this->routes[$path] = $rules;
     }
 
-    public function processRoute(string $url, string $method)
+    public function processRoute(string $url, string $method): void
     {
         $routes = $this->routes;
         if (!$routes) {
