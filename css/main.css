@@ -1,0 +1,140 @@
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul {
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    background-color: #5193c2;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.greeting-title {
+    font-size: 48px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    color: #ffffff;
+}
+
+.greeting-title span {
+    font-size: 30px;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.title-section {
+    width: 50%;
+}
+
+.form-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.section-title {
+    line-height: 1.2;
+    letter-spacing: 12px;
+    color: #ffffff;
+}
+
+.form-wrapper {
+    width: 70%;
+    max-width: 500px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #4c82a8;
+    border-radius: 14px;
+}
+
+.form-title {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #4c82a8;
+}
+
+.label {
+    display: block;
+    font-size: 16px;
+    text-align: left;
+    color: grey;
+
+}
+
+.input {
+    width: 100%;
+    padding: 5px;
+    font-size: 18px;
+    border: 1px solid grey;
+    border-radius: 2px;
+}
+
+.input-wrapper:not(:last-child) {
+    margin-bottom: 12px;
+}
+
+.button {
+    width: 70%;
+    padding: 10px;
+    margin-top: 18px;
+    border: 0;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #5193c2;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: #4c82a8;
+}
+
+.sum-title {
+    font-size: 48px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.sum-title span {
+    font-weight: 800;
+    text-decoration: underline;
+}

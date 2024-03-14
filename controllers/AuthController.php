@@ -4,25 +4,29 @@ class AuthController
 {
     use Validator;
 
-    public function login(array $data): void
+    public function login()
     {
-        $email = $data['email'];
-        $password = $data['password'];
+        return view('login.php');
+    }
 
-        $data = [
-            'email' => $email,
-            'password' => $password,
-        ];
+    public function auth()
+    {
+        echo "auth process";
+    }
 
-        $rules = [
-            'email' => 'required|email|max:150',
-            'password' => 'required|max:250|min:8',
-        ];
+    public function register()
+    {
+        return view('register.php');
+    }
 
-        $this->validate($data, $rules);
-
-        if ($this->errors) {
-            throw new Exception(implode('-', $this->errors));
-        }
+    public function registerProccess()
+    {
+    $this->validate([], [
+            'name' => 'required|max:100',
+            'age' => 'int',
+            'gender' => 'enum:male,female',
+            'password' => 'required|min:8|max:100',
+            'email' => 'required|min:8|max:200|email'
+        ]);
     }
 }
