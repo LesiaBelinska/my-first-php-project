@@ -11,11 +11,11 @@
  <form action="/calculate" method="post">
      <div>
          <label for="first-number">First number</label>
-         <input type="number" name="first-number" id="first-number"/>
+         <input type="number" name="first-number" id="first-number" required/>
      </div>
      <div>
          <label for="second-number">Second number</label>
-         <input type="number" name="second-number" id="second-number"/>
+         <input type="number" name="second-number" id="second-number" required/>
      </div>
      <button type="submit">Calculate sum</button>
  </form>
